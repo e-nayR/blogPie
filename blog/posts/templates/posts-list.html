@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}POSTS{% endblock title %}
+
+{% block content %}
+  {% for post in posts %}
+    <div class="card single_post">
+      <div class="body">
+        <h3>{{post.title}}</h3>
+        <p>Post by {{post.user}}</p>
+        <p><i class="bi bi-clock"></i> {{ post.create_at }}</p>
+        {% if post.category != null %}
+        <p><span class="badge badge-info">{{post.category}}</span></p>
+        {% endif %}
+      </div>
+      <div class="footer">
+        <div class="actions">
+          <a href="{% url 'post-detail' post.id %}" class="btn btn-outline-secondary">See More</a>
+        </div>
+        <ul class="stats">
+          <li><a href="javascript:void(0);"></a></li>
+          <li><a href="javascript:void(0);" class="fa fa-heart">28</a></li>
+          <li><a href="javascript:void(0);" class="fa fa-comment">{{ post.comments_set.count }}</a></li>
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+  <ul class="pagination pagination-primary">
+    {% if posts.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">Previous
+        </a>
+      </li>
+      {% endif %}
+      <li class="page-item active"><a class="page-link" href="javascript:void(0);">{{ posts.number }}</a></li>
+      {% if posts.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">Next
+        </a>
+      </li>
+    {% endif %}
+  </ul>     
+{% endblock content%}
+
+  
+
+
+
+
+

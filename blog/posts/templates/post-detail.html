@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Post{% endblock title %}
+
+{% block content %}
+<div class="card single_post">
+    <div class="header">
+        <div class="row">
+            <div class="col-sm-11">
+                <h1>{{post.title}}</h1>
+                {% if post.category != null %}
+                <h5><span class="badge badge-info">{{post.category}}</span></h5>
+                {% endif %}
+            </div>
+            {% if post.user == user %}
+            <div class="col-sm-1">
+                <div class="dropdown show">
+                    <a class=" dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" ><i class="bi bi-three-dots"></i></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'post-update' post.id %}">Update <i class="bi bi-pencil-fill"></i></a>
+                    <a class="dropdown-item" href="{% url 'post-delete' post.id %}">Delete <i class="bi bi-trash-fill"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+  <div class="body">
+    {% if post.image %}
+    <div class="img-post">
+      <img class="d-block img-fluid" src="{{post.image.url}}" alt="{{post.title}}">
+    </div>
+    {% endif %} 
+    <ul class="comment-reply list-unstyled">
+        <li class="row clearfix">
+            <img src="../../media/images/brandmember.jpg" class="rounded-circle" height="30" width="30" alt="Avatar">
+            <div class="text-box col-md-10 col-8 p-l-0 p-r0">
+                <h6 class="m-b-0">{{post.user}}</h6>
+                <p>{{ post.create_at }}</p>
+            </div>
+        </li>
+    </ul>
+    <p>{{post.description}}</p>
+  </div>
+  <div class="footer">
+  </div>                        
+</div>
+
+<div class="card">
+    <div class="header">
+        <h5>Comments</h5>
+    </div>
+    <div class="body">
+        <ul class="comment-reply list-unstyled">
+            {% if comments %}
+            {% for comment in comments %}
+            <li class="row clearfix">
+                <img src="../../media/images/brandmember.jpg" class="rounded-circle" height="60" width="60" alt="Avatar">                  
+                <div class="text-box col-md-10 col-8 p-l-0 p-r0">
+                    <h5 class="m-b-0">{{comment.user}}</h5>
+                    <p>{{comment.comment}}</p>
+                    <ul class="list-inline">
+                        <li><a href="javascript:void(0);">{{comment.create_at}}</a></li>
+                        {% if comment.user == user %}
+                        <li><a href="{% url 'delete-comment' comment.post_id comment.id %}"><i class="bi bi-trash"></i></a></li>                        
+                        {% endif %}
+                    </ul>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>           
+        {% else %}
+            <p>This post doesn't have comments yet</p>
+        {% endif %}                             
+    </div>
+</div>
+
+{% if user.is_authenticated %}
+<div class="card">
+    <div class="header">
+        <h5>Leave a comment:</h5>
+    </div>
+    <div class="body">
+        <form method="POST">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">SUBMIT</button>
+            </div>                                
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
+
+

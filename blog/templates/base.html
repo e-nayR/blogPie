@@ -1,0 +1,346 @@
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+      body{
+        background-color: #f4f7f6;
+        margin-top:5px;
+    }
+    .card {
+        background: #fff;
+        transition: .5s;
+        border: 0;
+        margin-bottom: 30px;
+        border-radius: .55rem;
+        position: relative;
+        width: 100%;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    }
+    .card .body {
+        color: #444;
+        padding: 20px;
+        font-weight: 400;
+    }
+    .card .header {
+        color: #444;
+        padding: 20px;
+        position: relative;
+        box-shadow: none;
+    }
+    .single_post {
+        -webkit-transition: all .4s ease;
+        transition: all .4s ease
+    }
+    
+    .single_post .body {
+        padding: 30px
+    }
+    
+    .single_post .img-post {
+        position: relative;
+        overflow: hidden;
+        max-height: 500px;
+        margin-bottom: 30px
+    }
+    
+    .single_post .img-post>img {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+        -webkit-transition: -webkit-transform .4s ease, opacity .4s ease;
+        transition: transform .4s ease, opacity .4s ease;
+        max-width: 100%;
+        filter: none;
+        -webkit-filter: grayscale(0);
+        -webkit-transform: scale(1.01)
+    }
+    
+    .single_post .img-post:hover img {
+        -webkit-transform: scale(1.02);
+        -ms-transform: scale(1.02);
+        transform: scale(1.02);
+        opacity: .7;
+        filter: gray;
+        -webkit-filter: grayscale(1);
+    }
+    
+    .single_post .img-post:hover .social_share {
+        display: block
+    }
+    
+    .single_post .footer {
+        padding: 0 30px 30px 30px
+    }
+    
+    .single_post .footer .actions {
+        display: inline-block
+    }
+    
+    .single_post .footer .stats {
+        cursor: default;
+        list-style: none;
+        padding: 0;
+        display: inline-block;
+        float: none;
+        margin: 0;
+        line-height: 35px
+    }
+    
+    .single_post .footer .stats li {
+        border-left: solid 1px rgba(160, 160, 160, 0.3);
+        display: inline-block;
+        font-weight: 400;
+        letter-spacing: 0.25em;
+        line-height: 1;
+        margin: 0 0 0 2em;
+        padding: 0 0 0 2em;
+        text-transform: uppercase;
+        font-size: 13px
+    }
+    
+    .single_post .footer .stats li a {
+        color: #777
+    }
+    
+    .single_post .footer .stats li:first-child {
+        border-left: 0;
+        margin-left: 0;
+        padding-left: 0
+    }
+    
+    .single_post h3 {
+        font-size: 20px;
+        text-transform: uppercase
+    }
+    
+    .single_post h3 a {
+        color: #242424;
+        text-decoration: none
+    }
+    
+    .single_post p {
+        font-size: 16px;
+        line-height: 26px;
+        font-weight: 300;
+        margin: 0
+    }
+    
+    .single_post .blockquote p {
+        margin-top: 0 !important
+    }
+    
+    .single_post .meta {
+        list-style: none;
+        padding: 0;
+        margin: 0
+    }
+    
+    .single_post .meta li {
+        display: inline-block;
+        margin-right: 15px
+    }
+    
+    .single_post .meta li a {
+        font-style: italic;
+        color: #959595;
+        text-decoration: none;
+        font-size: 12px
+    }
+    
+    .single_post .meta li a i {
+        margin-right: 6px;
+        font-size: 12px
+    }
+    
+    .single_post2 {
+        overflow: hidden
+    }
+    
+    .single_post2 .content {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-left: 80px;
+        position: relative
+    }
+    
+    .single_post2 .content .actions_sidebar {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 60px
+    }
+    
+    .single_post2 .content .actions_sidebar a {
+        display: inline-block;
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        margin-right: 0;
+        text-align: center;
+        border-right: 1px solid #e4eaec
+    }
+    
+    .single_post2 .content .title {
+        font-weight: 100
+    }
+    
+    .single_post2 .content .text {
+        font-size: 15px
+    }
+    
+    .right-box .categories-clouds li {
+        display: inline-block;
+        margin-bottom: 5px
+    }
+    
+    .right-box .categories-clouds li a {
+        display: block;
+        border: 1px solid;
+        padding: 6px 10px;
+        border-radius: 3px
+    }
+    
+    .right-box .instagram-plugin {
+        overflow: hidden
+    }
+    
+    .right-box .instagram-plugin li {
+        float: left;
+        overflow: hidden;
+        border: 1px solid #fff
+    }
+    
+    .comment-reply li {
+        margin-bottom: 15px
+    }
+    
+    .comment-reply li:last-child {
+        margin-bottom: none
+    }
+    
+    .comment-reply li h5 {
+        font-size: 18px
+    }
+    
+    .comment-reply li p {
+        margin-bottom: 0px;
+        font-size: 15px;
+        color: #777
+    }
+    
+    .comment-reply .list-inline li {
+        display: inline-block;
+        margin: 0;
+        padding-right: 20px
+    }
+    
+    .comment-reply .list-inline li a {
+        font-size: 13px
+    }
+    
+    @media (max-width: 640px) {
+        .blog-page .left-box .single-comment-box>ul>li {
+            padding: 25px 0
+        }
+        .blog-page .left-box .single-comment-box ul li .icon-box {
+            display: inline-block
+        }
+        .blog-page .left-box .single-comment-box ul li .text-box {
+            display: block;
+            padding-left: 0;
+            margin-top: 10px
+        }
+        .blog-page .single_post .footer .stats {
+            float: none;
+            margin-top: 10px
+        }
+        .blog-page .single_post .body,
+        .blog-page .single_post .footer {
+            padding: 30px
+        }
+    }
+  </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-brand">
+            Blog Pie
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link"href="{% url 'home' %}"><i class="bi bi-house"></i> Home</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}"><i class="bi bi-person-circle"></i> Perfil</a></li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button class="btn" type="submit"><i class="bi bi-box-arrow-in-left"></i> Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"><i class="bi bi-person-plus"></i> Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div id="main-content" class="blog-page">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-lg-8 col-md-12 left-box">
+                    {% block content %}
+                    {% endblock content %} 
+                </div>                         
+                <div class="col-lg-4 col-md-12 right-box">
+                    {% if request.path == '/' %}
+                        <div class="card">
+                            <form method="GET" class="body search">
+                            <div class="input-group m-b-0">
+                                <input type="search" name="search" class="form-control" placeholder="Search...">                                    
+                            </div>
+                            </form>
+                        </div>
+                    {% endif %}
+                    {% if  categories%}
+                        <div class="card">
+                            <div class="header">
+                                <h2>Categories Clouds</h2>
+                            </div>
+                            <div class="body widget">
+                                <ul class="list-unstyled categories-clouds m-b-0">
+                                    {% for category in categories %}
+                                    <li><a href="{% url 'filter-category' category.title %}">{{category.title}}</a></li>
+                                    {% endfor %}
+                                    {% if user.is_authenticated %}
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'create-category' %}"><i class="bi bi-plus-lg"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% block infor %}
+                    {% endblock  %}
+                </div>
+            </div>
+        </div>
+    </div>   
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+</body>
+</html>
