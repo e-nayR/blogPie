@@ -1,5 +1,5 @@
 # 🍰🐍 Blog Pie 
-Projeto de um Blog simples, para interagir com  as publicações e ter suas próprias postagens.
+Projeto de um Blog, para interagir com  as publicações e ter suas próprias postagens.
 
 ## 🛠️ Tecnologias
 - Python 
